@@ -1,0 +1,15 @@
+# IDE/Editor
+.claude/
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.zip
+node_modules/
+
+# Cloudflare
+backend/.wrangler/

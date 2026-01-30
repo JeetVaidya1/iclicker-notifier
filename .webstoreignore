@@ -1,0 +1,32 @@
+# Files to exclude from Chrome Web Store package
+
+# Development/IDE files
+.claude/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Documentation (not needed in extension)
+README.md
+PRIVACY.md
+LICENSE
+*.md
+
+# Backend code (deployed separately)
+backend/
+
+# Git
+.git/
+.gitignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build/dev files
+node_modules/
+package.json
+package-lock.json
+*.log

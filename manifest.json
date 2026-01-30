@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "iClicker Poll Notifier",
+  "version": "1.0.0",
+  "description": "Never miss an iClicker poll! Get instant desktop and phone notifications when polls start.",
+  "permissions": [
+    "notifications",
+    "storage",
+    "offscreen"
+  ],
+  "host_permissions": [
+    "https://*.iclicker.com/*",
+    "https://*.macmillanlearning.com/*",
+    "https://*.workers.dev/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.iclicker.com/*",
+        "https://*.macmillanlearning.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

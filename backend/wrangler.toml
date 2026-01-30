@@ -1,0 +1,11 @@
+name = "iclicker-notifier"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# KV Namespace for storing user registrations
+[[kv_namespaces]]
+binding = "USERS"
+id = "719c8a27a6d640769d8292f209952bac"
+
+# Environment variables (set via wrangler secret)
+# TELEGRAM_BOT_TOKEN - set with: wrangler secret put TELEGRAM_BOT_TOKEN

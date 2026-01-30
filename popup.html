@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      width: 340px;
+      padding: 16px;
+      background: #f9fafb;
+    }
+    
+    h1 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    h2 {
+      font-size: 12px;
+      font-weight: 600;
+      color: #6b7280;
+      margin: 16px 0 8px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px;
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #e5e7eb;
+    }
+    
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #9ca3af;
+    }
+    
+    .status-dot.active {
+      background: #22c55e;
+      animation: pulse 2s infinite;
+    }
+    
+    .status-dot.poll-active {
+      background: #ef4444;
+      animation: pulse 0.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .status-text {
+      font-size: 13px;
+      color: #4b5563;
+    }
+    
+    .settings {
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      overflow: hidden;
+    }
+    
+    .setting-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .setting-item:last-child {
+      border-bottom: none;
+    }
+    
+    .setting-label {
+      font-size: 13px;
+      color: #374151;
+    }
+    
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+    }
+    
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #d1d5db;
+      transition: 0.2s;
+      border-radius: 24px;
+    }
+    
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.2s;
+      border-radius: 50%;
+    }
+    
+    .toggle input:checked + .toggle-slider {
+      background-color: #3b82f6;
+    }
+    
+    .toggle input:checked + .toggle-slider:before {
+      transform: translateX(20px);
+    }
+    
+    .telegram-config {
+      background: white;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      padding: 12px;
+      margin-top: 8px;
+    }
+    
+    .telegram-config.hidden {
+      display: none;
+    }
+    
+    .input-group {
+      margin-bottom: 12px;
+    }
+    
+    .input-group:last-of-type {
+      margin-bottom: 0;
+    }
+    
+    .input-group label {
+      display: block;
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #111827;
+    }
+    
+    .input-group input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    }
+    
+    .input-group input::placeholder {
+      color: #9ca3af;
+    }
+    
+    .setup-steps {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #e5e7eb;
+      line-height: 1.5;
+    }
+    
+    .setup-steps a {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+    
+    .setup-steps a:hover {
+      text-decoration: underline;
+    }
+    
+    .setup-steps ol {
+      margin: 8px 0 0 16px;
+    }
+    
+    .setup-steps li {
+      margin-bottom: 4px;
+    }
+    
+    .setup-steps code {
+      background: #f3f4f6;
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 11px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    
+    .btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+    
+    .btn-secondary {
+      background: #1f2937;
+      color: white;
+    }
+    
+    .btn-secondary:hover {
+      background: #374151;
+    }
+    
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .test-result {
+      margin-top: 8px;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      display: none;
+    }
+    
+    .test-result.success {
+      display: block;
+      background: #d1fae5;
+      color: #065f46;
+    }
+    
+    .test-result.error {
+      display: block;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .step-hint {
+      font-size: 12px;
+      color: #6b7280;
+      text-align: center;
+      margin: 8px 0;
+    }
+
+    .connected-status {
+      margin-top: 12px;
+      padding: 12px;
+      background: #d1fae5;
+      color: #065f46;
+      border-radius: 6px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .connected-status.hidden {
+      display: none;
+    }
+
+    .connected-icon {
+      font-weight: bold;
+    }
+
+    .btn-link {
+      background: none;
+      border: none;
+      color: #065f46;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 12px;
+      margin-left: auto;
+    }
+
+    .debug-section {
+      margin-top: 16px;
+    }
+    
+    .debug-btn {
+      width: 100%;
+      padding: 10px;
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .debug-btn:hover {
+      background: #e5e7eb;
+    }
+    
+    .footer {
+      margin-top: 16px;
+      font-size: 11px;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    .session-info {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin-bottom: 16px;
+    }
+
+    .session-info.hidden {
+      display: none;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast.success {
+      background: #059669;
+      color: white;
+    }
+
+    .toast.error {
+      background: #dc2626;
+      color: white;
+    }
+
+    .toast.info {
+      background: #2563eb;
+      color: white;
+    }
+
+    .share-section {
+      margin-top: 16px;
+      padding: 12px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .share-section p {
+      color: white;
+      font-size: 12px;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .share-btn {
+      background: white;
+      color: #667eea;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .share-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .member-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔔 iClicker Notifier</h1>
+  
+  <div class="status">
+    <div class="status-dot" id="status-dot"></div>
+    <span class="status-text" id="status-text">Checking status...</span>
+  </div>
+
+  <div id="session-info" class="session-info hidden">
+    <div id="session-course" style="font-size: 11px; color: #6b7280;"></div>
+    <div id="session-activity" style="font-size: 11px; color: #6b7280;"></div>
+  </div>
+  
+  <h2>Desktop</h2>
+  <div class="settings">
+    <div class="setting-item">
+      <span class="setting-label">Desktop notifications</span>
+      <label class="toggle">
+        <input type="checkbox" id="notifications-toggle" checked>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div class="setting-item">
+      <span class="setting-label">Play sound</span>
+      <label class="toggle">
+        <input type="checkbox" id="sound-toggle" checked>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+    <div class="setting-item">
+      <button class="btn-link" id="test-desktop-btn" style="color: #3b82f6; margin-left: auto;">Test notification & sound</button>
+    </div>
+  </div>
+
+  <h2>Phone (Telegram)</h2>
+  <div class="settings">
+    <div class="setting-item">
+      <span class="setting-label">Send to Telegram</span>
+      <label class="toggle">
+        <input type="checkbox" id="telegram-toggle">
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+  </div>
+  
+  <div class="telegram-config hidden" id="telegram-config">
+    <div class="setup-steps">
+      <strong>Quick Setup (30 seconds):</strong>
+    </div>
+
+    <div id="setup-steps-container">
+      <button class="btn btn-primary step-btn" id="open-bot-btn" style="width: 100%; margin-top: 10px;">
+        Step 1: Open Bot in Telegram
+      </button>
+
+      <p class="step-hint">Send any message (like "hi") to get your code</p>
+
+      <div class="input-group" style="margin-top: 10px;">
+        <label>Step 2: Enter your code</label>
+        <input type="text" id="registration-code" placeholder="123456" maxlength="6" pattern="[0-9]*" inputmode="numeric" style="text-align: center; font-size: 18px; letter-spacing: 4px;">
+      </div>
+
+      <button class="btn btn-secondary" id="verify-btn" style="width: 100%; margin-top: 10px;">
+        Connect
+      </button>
+    </div>
+
+    <div class="test-result" id="test-result"></div>
+
+    <div class="connected-status hidden" id="connected-status">
+      <div style="flex: 1;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="connected-icon">✓</span> Connected!
+        </div>
+        <div id="token-display" style="font-size: 10px; color: #047857; margin-top: 4px; font-family: monospace;">
+          Token: loading...
+        </div>
+        <div style="font-size: 9px; color: #6b7280; margin-top: 2px;">
+          Run /sync in Telegram to verify match
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <button class="btn-link" id="test-telegram">Send test</button>
+        <button class="btn-link" id="disconnect-btn" style="color: #991b1b;">Disconnect</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="share-section" id="share-section" style="display: none;">
+    <p>📢 More classmates = better detection!</p>
+    <button class="share-btn" id="share-btn">Share with Classmates</button>
+  </div>
+
+  <div class="debug-section">
+    <button class="debug-btn" id="scan-btn">🔍 Scan Page for Poll Elements</button>
+  </div>
+
+  <div class="footer">
+    Keep iClicker tab open for notifications
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="config.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
