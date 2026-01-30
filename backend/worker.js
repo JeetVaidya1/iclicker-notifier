@@ -14,6 +14,9 @@ const TELEGRAM_API = 'https://api.telegram.org/bot';
 // Rate limiting: max 1 notification per user per 60 seconds (KV minimum TTL)
 const RATE_LIMIT_SECONDS = 60;
 
+// Admin chat ID for receiving feedback
+const ADMIN_CHAT_ID = '7596101624';
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -180,8 +183,12 @@ async function handleWebhook(request, env) {
         `/feedback Love the app! Would be great to have Discord support too.`
       );
     } else {
-      // Log feedback (in production, you might store this or forward to admin)
-      console.log(`Feedback from ${chatId}: ${feedbackText}`);
+      // Forward feedback to admin
+      await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, ADMIN_CHAT_ID,
+        `📬 *New Feedback*\n\n` +
+        `From: \`${chatId}\`\n\n` +
+        `Message:\n${feedbackText}`
+      );
 
       await sendTelegramMessage(env.TELEGRAM_BOT_TOKEN, chatId,
         `✅ *Thanks for your feedback!*\n\n` +
