@@ -2,50 +2,64 @@
 
 Never miss an iClicker poll again. Get instant desktop and phone notifications when your instructor starts a question.
 
-> **Disclaimer:** This is an unofficial, community-built extension. It is not affiliated with, endorsed by, or connected to iClicker, Macmillan Learning, or any educational institution.
-
-## Features
-
-- **Desktop Notifications** - Instant alerts when a poll starts
-- **Sound Alerts** - Audio notification so you don't miss it
-- **Phone Notifications** - Connect Telegram to get alerts on your phone
-- **Collaborative Detection** - When anyone in your class detects a poll, everyone gets notified
-- **"LIVE" Badge** - Visual indicator on the extension icon when a poll is active
+> **Disclaimer:** This is an unofficial, community-built extension. It is not affiliated with iClicker or Macmillan Learning.
 
 ## Installation
 
-1. Install from the Chrome Web Store
-2. Navigate to your iClicker class page
-3. Click the extension icon to configure notifications
+### From Chrome Web Store (Coming Soon)
+1. Click the Chrome Web Store link
+2. Click "Add to Chrome"
+3. Done!
+
+### Manual Install (For Now)
+1. **Download this project**
+   - Click the green **Code** button above
+   - Click **Download ZIP**
+   - Unzip the folder somewhere on your computer
+
+2. **Open Chrome Extensions**
+   - Open Chrome
+   - Type `chrome://extensions` in the address bar
+   - Press Enter
+
+3. **Turn on Developer Mode**
+   - Look at the top right corner
+   - Flip the **Developer mode** switch ON
+
+4. **Load the extension**
+   - Click **Load unpacked** (top left)
+   - Find the folder you unzipped
+   - Select it and click Open
+
+5. **You're done!**
+   - You should see the 🔔 icon in your toolbar
+   - Go to your iClicker class page and click the icon to set it up
+
+## How to Use
+
+1. Go to your iClicker class page (student.iclicker.com)
+2. Keep the tab open
+3. When a poll starts, you'll get a notification!
 
 ## Phone Notifications (Optional)
 
-Want notifications on your phone? Set up Telegram in 30 seconds:
+Want notifications on your phone too?
 
-1. Click the extension icon and enable "Send to Telegram"
-2. Click "Open Bot in Telegram"
-3. Send any message to the bot to get your 6-digit code
-4. Enter the code in the extension and click "Connect"
-
-## Troubleshooting
-
-**Not getting notifications?**
-- Make sure Chrome has notification permissions enabled
-- Keep your iClicker tab open (it can be in the background)
-
-**Telegram not working?**
-- Try disconnecting and reconnecting in the extension popup
-- Codes expire after 10 minutes - request a new one if needed
+1. Click the extension icon
+2. Turn on "Send to Telegram"
+3. Click "Open Bot in Telegram"
+4. Send any message to the bot
+5. Copy the 6-digit code it gives you
+6. Paste the code in the extension and click Connect
 
 ## Privacy
 
-- We **never** collect your login credentials or poll answers
-- We **never** access your iClicker account
-- We only monitor the page visually to detect when polls appear
-- If you enable Telegram, we store a token to send you notifications
+- We **never** see your iClicker password
+- We **never** see your answers
+- We only detect when polls appear on the page
 
-For full details, see our [Privacy Policy](PRIVACY.md).
+See our full [Privacy Policy](PRIVACY.md).
 
-## Support
+## Need Help?
 
-Send feedback through the Telegram bot using `/feedback`.
+Message the Telegram bot with `/feedback` and describe your issue.
